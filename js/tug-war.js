@@ -1,24 +1,27 @@
-// Pure renderer for the Supabase-backed two-team Tug of War quiz mode.
-// Positive position means the left team is winning. Deliberately no answer keys here.
-export function tugOutcome(position){if(position > 0)return 'Purple Pullers';if(position < 0)return 'Teal Titans';return 'Draw';}
+// QuizArena illustrated live Tug of War stage. Game scoring remains in Supabase.
+const seenPositions = new Map();
+export function tugOutcome(position){return position>0?'Purple Pullers':position<0?'Teal Titans':'Draw';}
 export function tugStage(game,players=[]){
- const pos=Math.max(-100,Math.min(100,Number(game.tug_position)||0));
+ const position=Math.max(-100,Math.min(100,Number(game.tug_position)||0));
+ const before=seenPositions.has(game.id)?seenPositions.get(game.id):position;
+ seenPositions.set(game.id,position);
+ const ropeFrom=(50-before*.34).toFixed(2), ropeTo=(50-position*.34).toFixed(2);
  const left=players.filter(p=>p.team===1).length,right=players.filter(p=>p.team===2).length;
  const rounds=Array.isArray(game.tug_rounds)?game.tug_rounds:[];
- const last=rounds.at(-1);
- const final=game.status==='finished';
- const label=pos>0?'Purple is pulling ahead!':pos<0?'Teal is pulling ahead!':'The rope is level — every answer counts!';
- const winner=final?(pos===0?'It’s a draw!':`${tugOutcome(pos)} win the tug!`):label;
- // The flag moves to the left as team 1 pulls, and to the right as team 2 pulls.
- const percent=(50-pos*.34).toFixed(2);
- return `<section class="tug-stage" aria-label="Tug of War team progress: ${Math.round(pos)} towards purple" data-tug-stage>
- <div class="tug-sun" aria-hidden="true">✦</div>
- <div class="tug-header"><div class="tug-team purple"><span class="tug-team-icon">★</span><div><b>Purple Pullers</b><small>${left} puller${left===1?'':'s'}</small></div></div><div class="tug-midlabel">TUG OF WAR <span>QUIZ</span></div><div class="tug-team teal"><div><b>Teal Titans</b><small>${right} puller${right===1?'':'s'}</small></div><span class="tug-team-icon">✦</span></div></div>
- <div class="tug-field"><div class="tug-hills"></div><div class="tug-pit" aria-hidden="true"></div>
- <div class="tug-character left-char" aria-hidden="true"><span class="tug-face">👩🏽‍🎓</span><span class="tug-face">🧑🏻‍🎓</span><span class="tug-face">👨🏾‍🎓</span></div>
- <div class="tug-character right-char" aria-hidden="true"><span class="tug-face">👨🏼‍🎓</span><span class="tug-face">👩🏻‍🎓</span><span class="tug-face">🧑🏾‍🎓</span></div>
- <div class="tug-rope"><div class="tug-rope-line"></div><span class="tug-mark left-mark"></span><span class="tug-mark right-mark"></span><span class="tug-knot" style="left:${percent}%" aria-hidden="true"><i></i></span></div></div>
- <div class="tug-progress-line"><span>◀ PURPLE GOAL</span><span>${final?'RESULT':`ROUND ${Math.max(0,game.question_index+1)} / ${game.question_count}`}</span><span>TEAL GOAL ▶</span></div>
- <div class="tug-message" role="status"><strong>${winner}</strong>${last?`<span>Last pull: ${last.left_correct}/${last.left_total} Purple vs ${last.right_correct}/${last.right_total} Teal correct</span>`:`<span>Accuracy, not team size, determines how far the rope moves.</span>`}</div>
+ const last=rounds.length?rounds[rounds.length-1]:null;
+ const finished=game.status==='finished';
+ const round=game.question_index<0?'GET READY':`ROUND ${Math.min(game.question_count,game.question_index+1)} OF ${game.question_count}`;
+ const label=finished?(position===0?'An epic draw!':`${tugOutcome(position)} take the victory!`):
+   position>0?'Purple Pullers are leading!':position<0?'Teal Titans are leading!':'The rope is tied — every answer counts!';
+ const lastAccuracy=last?`<span class="tug-round-stat">Last round: <b>${Number(last.left_correct)||0}/${Number(last.left_total)||0}</b> Purple · <b>${Number(last.right_correct)||0}/${Number(last.right_total)||0}</b> Teal</span>`:
+   '<span class="tug-round-stat">The rope moves after the teacher reveals each question.</span>';
+ return `<section class="tug-arena" data-tug-stage style="--rope-from:${ropeFrom}%;--rope-to:${ropeTo}%" aria-label="Tug of War arena: ${label}">
+  <div class="tug-arena-top"><span class="tug-event-tag"><span class="tug-live-dot"></span> QUIZARENA LIVE</span><span class="tug-round-badge">${finished?'FINAL RESULT':round}</span></div>
+  <div class="tug-scoreboard"><div class="tug-team-box team-purple"><span class="tug-team-symbol" aria-hidden="true">✦</span><div><strong>PURPLE PULLERS</strong><small>${left} player${left===1?'':'s'} ready</small></div></div><div class="tug-vs">VS</div><div class="tug-team-box team-teal"><div><strong>TEAL TITANS</strong><small>${right} player${right===1?'':'s'} ready</small></div><span class="tug-team-symbol" aria-hidden="true">✦</span></div></div>
+  <div class="tug-battleground"><div class="tug-stadium-lights" aria-hidden="true"></div><div class="tug-audience" aria-hidden="true"></div><div class="tug-sparks tug-sparks-left" aria-hidden="true">✦　✧</div><div class="tug-sparks tug-sparks-right" aria-hidden="true">✧　✦</div>
+    <div class="tug-floor" aria-hidden="true"></div><div class="tug-center-line" aria-hidden="true"></div><div class="tug-avatar tug-avatar-left" aria-hidden="true"><img src="assets/tug-player-purple.svg" alt=""></div><div class="tug-avatar tug-avatar-right" aria-hidden="true"><img src="assets/tug-player-teal.svg" alt=""></div>
+    <div class="tug-rope-track" aria-hidden="true"><span class="tug-rope-cord"></span><span class="tug-rope-flag"><b>★</b></span><span class="tug-rope-center"></span></div><div class="tug-goal tug-goal-left">◀ PURPLE WINS</div><div class="tug-goal tug-goal-right">TEAL WINS ▶</div></div>
+  <div class="tug-pull-meter"><span class="tug-meter-side purple">PURPLE</span><div class="tug-meter-track" aria-hidden="true"><div class="tug-meter-purple"></div><div class="tug-meter-teal"></div><i style="left:${ropeTo}%"></i></div><span class="tug-meter-side teal">TEAL</span></div>
+  <div class="tug-commentary" role="status"><strong>${label}</strong>${lastAccuracy}</div>
  </section>`;
 }

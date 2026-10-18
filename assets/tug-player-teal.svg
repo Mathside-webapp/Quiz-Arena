@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="400" height="385" viewBox="0 0 400 385" role="img" aria-label="Smiling illustrated student pulling the rope">
+<defs><linearGradient id="shirt" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#43ddd8"/><stop offset="1" stop-color="#078c92"/></linearGradient><linearGradient id="skin" x1="0" x2="1" y1="0" y2="1"><stop stop-color="#ffe6cb"/><stop offset="1" stop-color="#e9b08f"/></linearGradient><linearGradient id="hair" x1="0" x2="1" y1="0" y2="1"><stop stop-color="#323a58"/><stop offset="1" stop-color="#24253c"/></linearGradient><filter id="shadow"><feDropShadow dx="0" dy="11" stdDeviation="9" flood-color="#222145" flood-opacity=".18"/></filter></defs>
+<ellipse cx="205" cy="365" rx="108" ry="11" fill="#1f244b" opacity=".13"/>
+<g filter="url(#shadow)">
+<!-- planted legs and sneakers -->
+<path d="M153 301 Q154 325 147 350 L179 358 201 307Z" fill="#2a335d"/><path d="M212 307 L243 351 279 344 Q260 324 250 291Z" fill="#2a335d"/>
+<path d="M135 343 Q148 340 177 351 Q193 353 197 363 Q198 370 181 370 H120 Q113 370 118 361Z" fill="#fff" stroke="#d6dae8" stroke-width="3"/><path d="M242 338 Q261 335 278 343 Q294 349 302 364 Q300 371 282 371 H237 Q226 369 229 361Z" fill="#fff" stroke="#d6dae8" stroke-width="3"/>
+<!-- torso and leaning arms -->
+<path d="M124 238 Q132 213 159 214 L232 215 Q267 210 285 249 L279 317 Q236 340 150 318Z" fill="url(#shirt)" stroke="#078c92" stroke-opacity=".25" stroke-width="4"/>
+<path d="M126 243 Q98 251 92 289 L119 299 Q138 277 155 261" fill="none" stroke="#24b9b3" stroke-width="35" stroke-linecap="round"/>
+<path d="M282 250 Q293 268 283 286 L263 293" fill="none" stroke="#24b9b3" stroke-width="35" stroke-linecap="round"/>
+<path d="M151 221 Q178 250 207 243 Q231 240 248 217" fill="none" stroke="#ffffff" stroke-opacity=".3" stroke-width="9" stroke-linecap="round"/>
+<rect x="175" y="202" width="50" height="26" rx="16" fill="url(#skin)"/>
+<!-- head -->
+<path d="M130 130 Q111 126 121 155 Q128 173 144 164" fill="url(#skin)"/>
+<path d="M133 86 Q135 43 198 48 Q260 49 264 114 L256 173 Q250 207 200 213 Q144 207 139 169Z" fill="url(#skin)"/>
+<path d="M256 132 Q276 124 274 151 Q270 174 257 167" fill="url(#skin)"/>
+<path d="M126 138 Q108 86 128 50 Q150 16 193 28 Q228 3 259 41 Q285 68 268 136 Q263 99 241 83 Q223 102 191 89 Q163 111 136 104Z" fill="url(#hair)"/><path d="M154 54 Q208 30 236 58" fill="none" stroke="#ffffff" stroke-width="7" opacity=".12" stroke-linecap="round"/>
+<!-- lively face -->
+<path d="M160 123 Q170 115 182 124 M216 123 Q227 115 238 122" stroke="#322842" stroke-width="5" fill="none" stroke-linecap="round"/>
+<ellipse cx="173" cy="143" rx="6" ry="9" fill="#30324b"/><ellipse cx="227" cy="143" rx="6" ry="9" fill="#30324b"/><circle cx="175" cy="140" r="2.5" fill="white"/><circle cx="229" cy="140" r="2.5" fill="white"/>
+<ellipse cx="157" cy="159" rx="13" ry="7" fill="#f18889" opacity=".48"/><ellipse cx="245" cy="159" rx="13" ry="7" fill="#f18889" opacity=".48"/>
+<path d="M180 170 Q199 189 224 170 Q216 195 200 195 Q186 194 180 170" fill="#983f60"/><path d="M186 175 Q199 182 219 174" fill="none" stroke="white" stroke-width="7" stroke-linecap="round"/>
+<!-- pulling hands, gripping cable -->
+<path d="M128 254 Q155 259 177 253" stroke="#24b9b3" stroke-width="29" fill="none" stroke-linecap="round"/>
+<path d="M258 257 Q245 246 225 252" stroke="#24b9b3" stroke-width="29" fill="none" stroke-linecap="round"/>
+<ellipse cx="183" cy="252" rx="17" ry="14" fill="url(#skin)" transform="rotate(-13 183 252)"/><ellipse cx="220" cy="252" rx="17" ry="14" fill="url(#skin)" transform="rotate(13 220 252)"/>
+<path d="M178 251 Q186 244 193 252 M213 252 Q221 245 231 253" fill="none" stroke="#cf9174" stroke-width="2.5" stroke-linecap="round"/>
+</g></svg>
