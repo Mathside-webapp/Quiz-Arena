@@ -10,3 +10,7 @@
 .table-wrap{max-width:100%;min-width:0}
 .arena-question{font-weight:900}
 .arena-main .answer:disabled{opacity:1}
+
+/* Friendly and persistent PIN-join status for guest failures. */
+.guest-join-info{font-size:13px;line-height:1.55;background:#f5f2ff;border:1px solid #ded9ff;border-radius:14px;padding:12px 14px;color:#332d53;margin:12px 0 6px;}
+#joinStatus:not([hidden]){display:block!important;line-height:1.55;padding:12px 14px;margin:10px 0;border:1px solid #ffbaaa;border-radius:12px;background:#fff5f2;color:#8e2727;font-weight:600;}
